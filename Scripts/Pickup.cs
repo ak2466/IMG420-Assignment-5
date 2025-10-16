@@ -8,36 +8,42 @@ using Godot;
 /// </summary>
 public partial class Pickup : Area2D
 {
-    /// <summary>
-    /// A PackedScene pointing to a Particles2D node that will be instantiated when the pickup is collected.
-    /// </summary>
-    [Export]
-    public PackedScene ParticlesScene;
+	/// <summary>
+	/// A PackedScene pointing to a Particles2D node that will be instantiated when the pickup is collected.
+	/// </summary>
+	[Export]
+	public PackedScene ParticlesScene;
+	
+	[Signal]
+	public delegate void ItemCollectedEventHandler();
 
-    public override void _Ready()
-    {
-        // Connect the body_entered signal to detect when the player touches the pickup
-        Connect("body_entered", new Callable(this, nameof(OnBodyEntered)));
-    }
+	public override void _Ready()
+	{
+		// Connect the body_entered signal to detect when the player touches the pickup
+		Connect("body_entered", new Callable(this, nameof(OnBodyEntered)));
+	}
 
-    private void OnBodyEntered(Node2D body)
-    {
-        // Only react to the Player (customise this check as needed)
-        if (body is Player)
-        {
-            // Spawn particle effect at pickup position
-            if (ParticlesScene != null)
-            {
-                var particles = ParticlesScene.Instantiate() as Node2D;
-                if (particles != null)
-                {
-                    particles.GlobalPosition = GlobalPosition;
-                    GetParent().AddChild(particles);
-                }
-            }
+	private void OnBodyEntered(Node2D body)
+	{
+		// Only react to the Player (customise this check as needed)
+		if (body is Player)
+		{	
+			// Emit signal for item picked up
+			EmitSignal(SignalName.ItemCollected);
+			
+			// Spawn particle effect at pickup position
+			if (ParticlesScene != null)
+			{
+				var particles = ParticlesScene.Instantiate() as Node2D;
+				if (particles != null)
+				{
+					particles.GlobalPosition = GlobalPosition;
+					GetParent().AddChild(particles);
+				}
+			}
 
-            // Remove the pickup from the scene
-            QueueFree();
-        }
-    }
+			// Remove the pickup from the scene
+			QueueFree();
+		}
+	}
 }

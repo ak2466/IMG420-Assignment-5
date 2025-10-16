@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://bpydontqlqu5t"]
+
+[ext_resource type="Script" uid="uid://dl6v2wqgohye1" path="res://Scripts/Pickup.cs" id="1_udxw8"]
+[ext_resource type="Texture2D" uid="uid://c8a74wg42ua08" path="res://Assets/Test/tilesheet_complete.png" id="2_brn0f"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1p5hy"]
+radius = 20.14
+height = 40.28
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1p5hy"]
+atlas = ExtResource("2_brn0f")
+region = Rect2(832, 192, 64, 64)
+
+[node name="Key" type="Area2D" groups=["Keys"]]
+script = ExtResource("1_udxw8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_1p5hy")
+one_way_collision_margin = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_1p5hy")
