@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://2x3mim6m7y3s"]
+
+[sub_resource type="Curve" id="Curve_tetkr"]
+_data = [Vector2(0, 1), 0.0, 0.160234, 0, 0, Vector2(0.481752, 0.902439), -0.748348, -0.748348, 0, 0, Vector2(0.947368, 0.0103532), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_5ehqd"]
+curve = SubResource("Curve_tetkr")
+
+[sub_resource type="Gradient" id="Gradient_tetkr"]
+offsets = PackedFloat32Array(0, 0.25, 0.331818, 0.431818, 0.595455, 0.672727, 0.777273, 0.85, 0.986364)
+colors = PackedColorArray(1, 1, 1, 0, 1, 0.843675, 0.37787, 1, 0.87, 0.87, 0.87, 0, 1, 0.757, 0.46, 1, 0.93, 0.763995, 0.4557, 0, 0.93, 0.78027, 0.5394, 1, 0.9, 0.81585, 0.441, 0, 1, 0.9, 0.5, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5ehqd"]
+gradient = SubResource("Gradient_tetkr")
+width = 1000
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tetkr"]
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 80.0
+initial_velocity_max = 95.0
+angular_velocity_min = -1.60933e-05
+angular_velocity_max = -1.60933e-05
+orbit_velocity_min = -0.13
+orbit_velocity_max = 0.13
+radial_velocity_min = 100.0
+radial_velocity_max = 100.0
+gravity = Vector3(0, -120, 0)
+scale_max = 11.0
+scale_over_velocity_min = 1.0
+scale_over_velocity_max = 1.0
+color_ramp = SubResource("GradientTexture1D_5ehqd")
+alpha_curve = SubResource("CurveTexture_5ehqd")
+turbulence_enabled = true
+turbulence_noise_scale = 100.0
+turbulence_influence_min = 0.01
+turbulence_influence_max = 0.08
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+emitting = false
+amount = 1200
+lifetime = 5.0
+one_shot = true
+explosiveness = 0.7
+randomness = 1.0
+visibility_rect = Rect2(-16, -16, 32, 32)
+local_coords = true
+trail_lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_tetkr")

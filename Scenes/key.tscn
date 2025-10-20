@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bpydontqlqu5t"]
+[gd_scene load_steps=6 format=3 uid="uid://bpydontqlqu5t"]
 
-[ext_resource type="Script" uid="uid://dl6v2wqgohye1" path="res://Scripts/Pickup.cs" id="1_udxw8"]
+[ext_resource type="Script" uid="uid://jcwgpcnjwa3g" path="res://Key.cs" id="1_udxw8"]
 [ext_resource type="Texture2D" uid="uid://c8a74wg42ua08" path="res://Assets/Test/tilesheet_complete.png" id="2_brn0f"]
+[ext_resource type="PackedScene" uid="uid://dd2xg0yiypym2" path="res://Scenes/Particles1.tscn" id="2_lc1k7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1p5hy"]
 radius = 20.14
@@ -13,6 +14,7 @@ region = Rect2(832, 192, 64, 64)
 
 [node name="Key" type="Area2D" groups=["Keys"]]
 script = ExtResource("1_udxw8")
+ParticlesScene = ExtResource("2_lc1k7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_1p5hy")

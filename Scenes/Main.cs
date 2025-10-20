@@ -1,43 +1,47 @@
-// In Main.cs:
 using Godot;
 using System;
-using System.Linq;
 
 public partial class Main : Node2D
 {
-	// Handler method—this is what runs when the signal is received
-	private void OnKeyCollected()
-	{
-		GD.Print("MANAGER: Signal RECEIVED! Key (Pickup.cs) was collected."); 
-		// Logic for tracking keys collected...
-	}
+	private GlobalManager _globalManager;
 
 	public override void _Ready()
 	{
-		// CRITICAL STEP: Defer the connection to run after the TileMap instantiates children.
-		CallDeferred(nameof(ConnectAllKeys));
+		// 1. Get the reference to the Autoload/Singleton instance.
+		// We use the path /root/GlobalManager (assuming you named the Autoload 'GlobalManager').
+		_globalManager = GetNode<GlobalManager>("/root/GlobalManager");
+
+		if (_globalManager == null)
+		{
+			GD.PrintErr("CRITICAL: GlobalManager Autoload not found. Check Project Settings -> Autoload.");
+			return;
+		}
+
+		// 2. Connect to the manager's signal for the victory condition.
+		// The '+' operator is the C# way to subscribe to an event-like delegate (Signal).
+		_globalManager.AllKeysCollected += OnAllKeysCollected;
+		
+		GD.Print("Main scene is ready and subscribed to GlobalManager events.");
 	}
 
-	private void ConnectAllKeys()
+	// 3. Handler method that executes when the GlobalManager emits the signal.
+	private void OnAllKeysCollected()
 	{
-		// 1. Get the collection using the case-sensitive GROUP NAME: "Keys"
-		var nodesInGroup = GetTree().GetNodesInGroup("Keys");
+		GD.Print("LEVEL MANAGER: All keys have been collected! Opening the final door...");
 		
-		// 2. Iterate and safely cast each node to the C# CLASS NAME: 'Pickup'
-		foreach (Node node in nodesInGroup)
+		// TO DO: Add logic here to:
+		// a) Find the door node (e.g., GetNode<Door>("DoorNode"))
+		// b) Call a method to open it (e.g., door.OpenDoor())
+		// c) Play a congratulatory sound or animation.
+	}
+	
+	// You may want to unsubscribe from the signal when the node leaves the tree
+	public override void _ExitTree()
+	{
+		// Safely unsubscribe to prevent errors if the manager persists across scenes
+		if (_globalManager != null)
 		{
-			// The 'is' operator checks if it's the right type and casts it to 'pickupInstance'
-			if (node is Pickup pickupInstance) 
-			{
-				// 3. Connect the C# event-like delegate to the local handler method
-				pickupInstance.ItemCollected += OnKeyCollected;
-				GD.Print($"MANAGER: Successfully connected to pickup instance: {pickupInstance.Name}.");
-			}
-		}
-		
-		if (nodesInGroup.Count == 0)
-		{
-			GD.PrintErr("CRITICAL: GetNodesInGroup('Keys') returned zero. Check group name and spelling.");
+			_globalManager.AllKeysCollected -= OnAllKeysCollected;
 		}
 	}
 }

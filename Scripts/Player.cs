@@ -64,4 +64,17 @@ public partial class Player : CharacterBody2D
 			}
 		}
 	}
+	
+	public void HandleOutOfBounds()
+	{
+		// 1. Disable the player's input and visual components
+		SetProcess(false);
+		SetPhysicsProcess(false);
+		// Optionally hide or change the player sprite (e.g., Sprite2D.Visible = false)
+
+		GD.Print("Player died. Reloading scene...");
+		
+		// 2. Queue the scene reload for the next frame
+		GetTree().ReloadCurrentScene();
+	}
 }

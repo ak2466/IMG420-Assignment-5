@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=3 uid="uid://dfmlgesky41s"]
+
+[ext_resource type="Script" uid="uid://k2hdjx0f32l2" path="res://Lock.cs" id="1_34bqn"]
+[ext_resource type="Texture2D" uid="uid://c8a74wg42ua08" path="res://Assets/Test/tilesheet_complete.png" id="1_h20oy"]
+[ext_resource type="PackedScene" uid="uid://2x3mim6m7y3s" path="res://Scenes/Particles2.tscn" id="2_c5kxq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h20oy"]
+size = Vector2(64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_34bqn"]
+atlas = ExtResource("1_h20oy")
+region = Rect2(1152, 384, 64, 64)
+
+[node name="LockArea" type="Area2D"]
+script = ExtResource("1_34bqn")
+ParticlesScene = ExtResource("2_c5kxq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_h20oy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_34bqn")
