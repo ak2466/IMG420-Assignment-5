@@ -65,6 +65,7 @@ public partial class Enemy : CharacterBody2D
 		// Retrieve the next point along the computed path
 		Vector2 nextPoint = _navAgent.GetNextPathPosition();
 
+
 		// Compute direction towards the next point
 		Vector2 rawDirection = (nextPoint - GlobalPosition).Normalized();
 		Vector2 desiredVelocity = rawDirection * Speed;
@@ -73,6 +74,14 @@ public partial class Enemy : CharacterBody2D
 
 		// Move towards the target
 		Velocity = desiredVelocity;
+		
+		if (_navAgent.IsNavigationFinished())
+		{
+			Velocity = Vector2.Zero;
+			_anim.Play("idle");
+			return;
+		}
+		
 		MoveAndSlide();
 		
 				// Flip and play animations based on movement
@@ -80,7 +89,7 @@ public partial class Enemy : CharacterBody2D
 		{
 			if (Mathf.Abs(Velocity.X) > 0.01f)
 			{
-				_anim.FlipH = Velocity.X < 0.01f;
+				_anim.FlipH = Velocity.X < 0; 
 				_anim.Play("walk");
 			}
 			else
