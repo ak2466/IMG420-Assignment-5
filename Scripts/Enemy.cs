@@ -20,7 +20,9 @@ public partial class Enemy : CharacterBody2D
 	public NodePath TargetPath;
 
 	private NavigationAgent2D _navAgent;
+	private Area2D _area2d;
 	private Node2D _target;
+	private AnimatedSprite2D _anim;
 
 	public override void _Ready()
 	{
@@ -30,9 +32,26 @@ public partial class Enemy : CharacterBody2D
 		{
 			_target = GetNode<Node2D>(TargetPath);
 		}
+		
+		// Get the Area2D and link the body entered signa
+		_area2d = GetNode<Area2D>("Hitbox");
+		_area2d.BodyEntered += OnBodyEntered;
 
 		// Configure navigation agent properties if needed (e.g., max speed)
 		// _navAgent.MaxSpeed = Speed;
+		
+		_anim = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+	}
+	
+	public void OnBodyEntered(Node2D body)
+	{
+		if (body is Player player)
+		{
+			// Call an abstract interaction method that the child class MUST define
+			GD.Print("Enemy touched");
+			player.Die();
+			
+		}
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -47,10 +66,29 @@ public partial class Enemy : CharacterBody2D
 		Vector2 nextPoint = _navAgent.GetNextPathPosition();
 
 		// Compute direction towards the next point
-		Vector2 direction = (nextPoint - GlobalPosition).Normalized();
+		Vector2 rawDirection = (nextPoint - GlobalPosition).Normalized();
+		Vector2 desiredVelocity = rawDirection * Speed;
+		
+		_navAgent.SetVelocity(desiredVelocity);
 
 		// Move towards the target
-		Velocity = direction * Speed;
+		Velocity = desiredVelocity;
 		MoveAndSlide();
+		
+				// Flip and play animations based on movement
+		if (_anim != null)
+		{
+			if (Mathf.Abs(Velocity.X) > 0.01f)
+			{
+				_anim.FlipH = Velocity.X < 0.01f;
+				_anim.Play("walk");
+			}
+			else
+			{
+				_anim.Play("idle");
+			}
+		}
 	}
+	
+	
 }

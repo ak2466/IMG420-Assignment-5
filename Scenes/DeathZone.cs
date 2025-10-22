@@ -17,7 +17,7 @@ public partial class DeathZone : Area2D
 			
 			// Call an abstract interaction method that the child class MUST define
 			GD.Print("Death zone crossed");
-			player.HandleOutOfBounds();
+			player.Die();
 			
 		}
 	}

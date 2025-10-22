@@ -55,10 +55,15 @@ public partial class GlobalManager : Node
 	
 	public void HandleLockInteraction()
 	{
-		if(NumCollectedKeys == NumTotalKeys)
+		if(NumCollectedKeys >= NumTotalKeys)
 		{
 			EmitSignal(SignalName.LockUnlocked);
 		}
+	}
+	
+	public void ResetState()
+	{
+		NumCollectedKeys = 0;
 	}
 	
 	// --- 5. Core Game Logic Method ---
