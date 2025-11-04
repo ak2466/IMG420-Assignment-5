@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=4 uid="uid://7y07h4vpdtgy"]
+[gd_scene load_steps=51 format=4 uid="uid://7y07h4vpdtgy"]
 
 [ext_resource type="Script" uid="uid://dt8ke5ut2yifx" path="res://Scenes/Main.cs" id="1_h1m7h"]
 [ext_resource type="Script" uid="uid://b8r1xkuul1sfd" path="res://Scripts/Player.cs" id="1_r150o"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://bpydontqlqu5t" path="res://Scenes/key.tscn" id="14_1p5hy"]
 [ext_resource type="PackedScene" uid="uid://dfmlgesky41s" path="res://Scenes/Lock.tscn" id="16_2w5on"]
 [ext_resource type="Script" uid="uid://busvdsfggjdhy" path="res://Scenes/HUD.cs" id="16_erwvk"]
+[ext_resource type="PackedScene" uid="uid://hq133stldn18" path="res://Scenes/LaserDetector.tscn" id="18_6heos"]
 [ext_resource type="Script" uid="uid://dmh476qpvtssh" path="res://Scenes/DeathZone.cs" id="18_346fj"]
 [ext_resource type="Script" uid="uid://1qbf0uapnit" path="res://Scripts/Enemy.cs" id="19_sxkr1"]
 [ext_resource type="Texture2D" uid="uid://dke6sxtj1fpoj" path="res://Assets/Treasure Hunters/The Crusty Crew/Sprites/Crabby/01-Idle/Idle 01.png" id="20_kpo4j"]
@@ -34,6 +35,8 @@
 [ext_resource type="Texture2D" uid="uid://bpf45j1cd87ha" path="res://Assets/Treasure Hunters/The Crusty Crew/Sprites/Crabby/02-Run/Run 04.png" id="32_vvnwx"]
 [ext_resource type="Texture2D" uid="uid://c33km15vybfm2" path="res://Assets/Treasure Hunters/The Crusty Crew/Sprites/Crabby/02-Run/Run 05.png" id="33_btbly"]
 [ext_resource type="Texture2D" uid="uid://cdwah48oqp6w1" path="res://Assets/Treasure Hunters/The Crusty Crew/Sprites/Crabby/02-Run/Run 06.png" id="34_vs04g"]
+[ext_resource type="Script" uid="uid://caq6333jmacnn" path="res://ChainSystem.cs" id="37_vvnwx"]
+[ext_resource type="PackedScene" uid="uid://d2dv16pfa3crn" path="res://Scenes/Segment.tscn" id="38_btbly"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_kln2b"]
 animations = [{
@@ -85,9 +88,9 @@ animations = [{
 height = 30.6667
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_hwpts"]
-vertices = PackedVector2Array(1058.27, 175.211, 999.359, 143.133, 1206, 148.789, 1206, 178.883, 1264.8, 191.969, 1281.81, 185.258, 1270, 199.281, 1397, 372.93, 993.297, 370.172, 1051.8, 318.703, 1397, 306.844, 1912.08, 163.82, 1912.85, 247, 1911.86, 246.117, 1295.8, 256.203, 1844.58, 244.047, 1468.77, 156, 1290, 182, 1290, 151.102, 1335.63, 182, 1478.26, 246, 1354, 198.156, 1844.62, 246, 1354, 246.039, 1462, 264.156, 1462, 307.883, 1328.8, 255.969, 1231.8, 192.203, 1248.77, 184.328, 1270, 242.883, 1312.77, 248.328)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6), PackedInt32Array(7, 8, 9, 10), PackedInt32Array(11, 12, 13), PackedInt32Array(10, 9, 0, 14), PackedInt32Array(11, 13, 15, 16), PackedInt32Array(17, 18, 16, 19), PackedInt32Array(20, 21, 19, 16, 15, 22), PackedInt32Array(23, 21, 20, 24, 10), PackedInt32Array(24, 25, 10), PackedInt32Array(26, 23, 10), PackedInt32Array(27, 28, 4, 6, 29), PackedInt32Array(14, 30, 26, 10), PackedInt32Array(29, 14, 0), PackedInt32Array(29, 0, 3, 27)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(1042, 314, 967, 380, 1407, 383, 1407, 317, 1469, 318, 1923, 263, 1922, 154, 1469, 146, 958, 132, 1048, 181)])
+vertices = PackedVector2Array(1908.66, 245.852, 1899.46, 245.727, 1899.63, 245.727, 967.188, -10, 966.547, -9.39062, 968.469, -47.2422, 960.523, 109.883, 963.18, 57.25, 973.43, 65.2891, 1142, 71.2812, 1141.87, 107.992, 1000.24, 62.7578, 1015.47, 63.3828, 1042.22, 64.75, 1142, 108.008, 1455.72, 175.008, 1906.32, 174.023, 1844.77, 244.062, 1266.39, -24.3203, 1145.24, -10, 1162, 5.78906, 1844.77, 244.992, 1462.12, 239.867, 1354, 198.156, 1335.63, 182, 1333, 182, 1333, 143.703, 1271.63, 118, 1226, 118, 1226, 70.1562, 1458.72, 268.133, 1461.74, 270.719, 1461.27, 310, 1413.79, 310, 1354, 246.039, 1403.91, 321.633, 1333, 320.188, 1333, 254.312, 1290, 135.648, 1290, 134.156, 1461.82, 264.602, 1162, 50.4922, 1207.63, 54, 1053.47, 59, 1056.13, 57.0703, 1062.03, 60.9688, 1081.63, 62.9062, 1087.71, 57.2891, 1105.24, 63.7031, 991.133, 56.7188, 1156.57, 54, 1138, 65.1406, 1120.11, 57.3281, 1022.14, 57.4375, 1023.8, 57.4375, 1026.25, 58.3203, 1030.88, 61.3203, 1069.32, 64.6172, 1217.15, 122.047, 1216.25, 121.883, 1217.82, 121.258)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 4, 5), PackedInt32Array(6, 7, 8), PackedInt32Array(9, 10, 6, 8, 11, 12, 13), PackedInt32Array(9, 14, 10), PackedInt32Array(15, 16, 0, 2, 17), PackedInt32Array(3, 5, 18, 19), PackedInt32Array(20, 19, 18), PackedInt32Array(15, 17, 21, 22, 23, 24), PackedInt32Array(24, 25, 26, 15), PackedInt32Array(27, 28, 29, 18), PackedInt32Array(30, 31, 32, 33, 34, 23), PackedInt32Array(35, 36, 37, 34, 33), PackedInt32Array(26, 38, 39), PackedInt32Array(40, 30, 23, 22), PackedInt32Array(41, 20, 18, 42), PackedInt32Array(43, 44, 45), PackedInt32Array(46, 47, 48), PackedInt32Array(8, 49, 11), PackedInt32Array(18, 15, 26), PackedInt32Array(18, 26, 39, 27), PackedInt32Array(18, 29, 42), PackedInt32Array(41, 42, 50), PackedInt32Array(51, 41, 50), PackedInt32Array(51, 50, 9), PackedInt32Array(48, 52, 51, 9), PackedInt32Array(12, 53, 54, 55, 56), PackedInt32Array(13, 43, 45, 57), PackedInt32Array(12, 56, 13), PackedInt32Array(9, 13, 57), PackedInt32Array(48, 9, 57, 46), PackedInt32Array(58, 59, 60)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(959, -58, 950, 120, 1141, 118, 1323, 152, 1323, 330, 1471, 333, 1472, 250, 1919, 256, 1916, 164, 1460, 165, 1271, -34)])
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_sxkr1"]
 vertices = PackedVector2Array(32, 32, -32, 32, -32, -19.9375, -22.1094, -32, 32, -32)
@@ -380,9 +383,27 @@ texture_region_size = Vector2i(64, 64)
 20:11/0 = 0
 21:11/0 = 0
 
+[sub_resource type="Resource" id="Resource_vvnwx"]
+metadata/__load_path__ = "res://Chain.cs"
+
+[sub_resource type="PackedScene" id="PackedScene_btbly"]
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"names": PackedStringArray("Node2D", "Node2D", "script", "SegmentScene"),
+"node_count": 1,
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 2, 2, 0, 3, 1, 0),
+"variants": [SubResource("Resource_vvnwx"), ExtResource("38_btbly")],
+"version": 3
+}
+
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_frkhe"]
 scenes/1/scene = ExtResource("14_1p5hy")
 scenes/2/scene = ExtResource("16_2w5on")
+scenes/3/scene = SubResource("PackedScene_btbly")
+scenes/4/scene = ExtResource("18_6heos")
 
 [sub_resource type="TileSet" id="TileSet_h1m7h"]
 tile_size = Vector2i(64, 64)
@@ -459,21 +480,29 @@ animations = [{
 [node name="Main" type="Node2D"]
 script = ExtResource("1_h1m7h")
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="LaserDetector" parent="." instance=ExtResource("18_6heos")]
+position = Vector2(992, 20)
+rotation = 1.5708
+LaserLength = 400.0
+MinOpacity = 0.4
+PulseSpeed = 10.0
+
+[node name="Player" type="CharacterBody2D" parent="." groups=["Player"]]
 scale = Vector2(3, 3)
 collision_mask = 9
 script = ExtResource("1_r150o")
-JumpVelocity = -450.0
+Speed = 300.0
+JumpVelocity = -550.0
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
 sprite_frames = SubResource("SpriteFrames_kln2b")
 animation = &"idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 position = Vector2(0, -5)
 shape = SubResource("CapsuleShape2D_kln2b")
 
-[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+[node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(1.4, 1.4)
 limit_bottom = 1000
 limit_smoothed = true
@@ -496,6 +525,7 @@ tile_map_data = PackedByteArray("AAD9/wIAAAABAAEAAAD+/wIAAAACAAEAAAD//wIAAAABAAE
 tile_set = SubResource("TileSet_h1m7h")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="ParallaxBackground"]
+visible = false
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground/ParallaxBackground"]
 motion_scale = Vector2(0.4, 1)
@@ -530,11 +560,11 @@ position = Vector2(0, 1)
 shape = SubResource("WorldBoundaryShape2D_2w5on")
 
 [node name="Enemy" type="CharacterBody2D" parent="."]
-position = Vector2(1053, 306)
+position = Vector2(1249, 76)
 collision_layer = 2
 collision_mask = 8
 script = ExtResource("19_sxkr1")
-TargetPath = NodePath("../CharacterBody2D")
+TargetPath = NodePath("../Player")
 
 [node name="Hitbox" type="Area2D" parent="Enemy"]
 
@@ -552,3 +582,12 @@ shape = SubResource("RectangleShape2D_sxkr1")
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_vvnwx")
 animation = &"idle"
+
+[node name="Chain" type="Node2D" parent="." node_paths=PackedStringArray("ChainAnchor")]
+script = ExtResource("37_vvnwx")
+LinkScene = ExtResource("38_btbly")
+ChainAnchor = NodePath("ChainAnchor")
+
+[node name="ChainAnchor" type="Marker2D" parent="Chain"]
+position = Vector2(1057, 50)
+gizmo_extents = 30.0

@@ -50,6 +50,17 @@ public partial class Player : CharacterBody2D
 		Velocity = v;
 		MoveAndSlide();
 
+		for (int i = 0; i < GetSlideCollisionCount(); i++)
+		{
+			var collision = GetSlideCollision(i);
+			if (collision.GetCollider() is RigidBody2D body)
+			{
+				// Apply impulse to physics objects like your chain
+				body.ApplyImpulse(Velocity * 0.5f);
+			}
+		}
+
+
 		// Flip and play animations based on movement
 		if (_anim != null)
 		{
