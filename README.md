@@ -2,7 +2,7 @@
 
 ## Shader & Particles: Wave Distortion Shader
 
-For this, I modified one of the particle scenes from my previous game in Assignment 4. I replaced the particle texture with the Godot logo, so the wave distortion would be visible. The wave distortion works by modulating the UV texture's X value with a sine function with time as an input so it changes over time.
+For this, I modified one of the particle scenes from my previous game in Assignment 4. I replaced the particle texture with the Godot logo, so the wave distortion would be visible. The wave distortion works by modulating the UV texture's X value with a sine function with time as an input so it changes over time. The gradient works by having a GradientTexture1D that is interpolated with the texture function. The direction is determined by an angle, which is then split into X and Y values for the UV by utilizing Cos and Sin respectively.
 
 ## Physics & Joints: Interactive Chain
 
