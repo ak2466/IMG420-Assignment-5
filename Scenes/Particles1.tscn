@@ -1,16 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://dd2xg0yiypym2"]
+[gd_scene load_steps=8 format=3 uid="uid://dd2xg0yiypym2"]
 
-[ext_resource type="Texture2D" uid="uid://f2nk0u2wjxnh" path="res://icon.svg" id="1_ahvmm"]
 [ext_resource type="Shader" uid="uid://b7cn77m6oc0re" path="res://Shaders/particle_1_shader.gdshader" id="1_q66dj"]
 [ext_resource type="Script" uid="uid://cyejvs802y1t5" path="res://Scenes/Particles1Shader.cs" id="1_smye0"]
+[ext_resource type="Texture2D" uid="uid://baod8bmwmy02b" path="res://white_square.png" id="2_ahvmm"]
+
+[sub_resource type="Gradient" id="Gradient_ahvmm"]
+offsets = PackedFloat32Array(0, 0.443396, 0.515723, 0.825472, 1)
+colors = PackedColorArray(0.5, 0, 0, 1, 0.550514, 0.357502, 0.129088, 1, 0.428186, 0.642948, 0.558749, 1, 0, 0.3, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_x3ltd"]
+gradient = SubResource("Gradient_ahvmm")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q66dj"]
 shader = ExtResource("1_q66dj")
-shader_parameter/wave_speed = 10.0
-shader_parameter/wave_frequency = 20.0
-shader_parameter/wave_intensity = 0.1
-shader_parameter/color_start = Color(1, 0.5, 0, 1)
-shader_parameter/color_end = Color(1, 0, 0.5, 1)
+shader_parameter/wave_speed = 180.0
+shader_parameter/wave_frequency = 8.255
+shader_parameter/wave_intensity = 1.0
+shader_parameter/gradient_angle = 258.449
+shader_parameter/gradient_texture = SubResource("GradientTexture1D_x3ltd")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tetkr"]
 lifetime_randomness = 1.0
@@ -36,7 +43,7 @@ turbulence_influence_max = 0.08
 material = SubResource("ShaderMaterial_q66dj")
 emitting = false
 amount = 60
-texture = ExtResource("1_ahvmm")
+texture = ExtResource("2_ahvmm")
 lifetime = 1.3
 one_shot = true
 explosiveness = 0.8
